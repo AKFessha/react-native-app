@@ -20,41 +20,21 @@ export default class App extends React.Component {
       .then(res => res.json())
       .then(data => {
         console.warn(url);
-        this.setState({
-          repos: data
-        });
+        this.setState({ repos: data });
+      })
+      .catch(error => {
+        console.error(error);
       });
   };
 
   render() {
     return (
-      // <View style={styles.container}>
-      //   <Text> I</Text>
-      //   <Image source={require("./assets/heart.jpg")} style={styles.img} />
-      //   <Text> CodeYourFuture</Text>
-      //   <Button
-      //     onPress={this.alert}
-      //     title="Enter"
-      //     color="#841584"
-      //     accessibilityLabel="Enter"
-      //   />
-      // </View>
       <View style={s.container}>
-        {/* <View style={[s.box, s.box1]}>
-          <Text style={s.text}> 1 </Text>
-        </View>
-        <View style={[s.box, s.box2]}>
-          <Text style={s.text}> 2 </Text>
-        </View>
-        <View style={[s.box, s.box3]}>
-          <Text style={s.text}> 3 </Text>
-        </View>  */}
         <View>
-          <Text>Header </Text>
+          <Text>Get your GitHub repos </Text>
         </View>
         <View>
           <TextInput
-            title="Enter Github Username"
             onChangeText={text =>
               this.setState({
                 searchValue: text
@@ -74,23 +54,9 @@ export default class App extends React.Component {
   }
 }
 
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-
-//     backgroundColor: "#fff",
-//     alignItems: "center",
-//     justifyContent: "center"
-//   },
-//   img: {
-//     width: 200,
-//     height: 200
-//   }
-// });
 const s = StyleSheet.create({
   container: {
     flex: 1,
-    height: 40,
     flexDirection: "column",
     backgroundColor: "#fff",
     alignItems: "center",
@@ -101,25 +67,5 @@ const s = StyleSheet.create({
     width: width - 20,
     borderColor: "gray",
     borderWidth: 1
-  },
-  box: {
-    width: 90,
-    height: 90,
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "column"
-  },
-  text: {
-    fontSize: 40,
-    color: "white"
-  },
-  box1: {
-    backgroundColor: "blue"
-  },
-  box2: {
-    backgroundColor: "green"
-  },
-  box: {
-    backgroundColor: "red"
   }
 });
