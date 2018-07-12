@@ -13,13 +13,12 @@ export default class App extends React.Component {
 
   handleSearch = () => {
     const value = this.state.searchValue;
-    // Alert.alert({ value });
+
     const url = `https://api.github.com/users/${value}/repos`;
 
     fetch(url)
       .then(res => res.json())
       .then(data => {
-        console.warn(url);
         this.setState({ repos: data });
       })
       .catch(error => {
@@ -46,8 +45,9 @@ export default class App extends React.Component {
         <View>
           <Button onPress={this.handleSearch} title="Search" />
         </View>
+        <Text style={s.countText}> {this.state.repos.length + "  repos"} </Text>
         {this.state.repos.map(repo => {
-          <Text>{repo.name} </Text>;
+          return <Text>{repo.name} </Text>;
         })}
       </View>
     );
@@ -67,5 +67,10 @@ const s = StyleSheet.create({
     width: width - 20,
     borderColor: "gray",
     borderWidth: 1
+  },
+  countText: {
+    paddingBottom: 20,
+    paddingTop: 20,
+    fontSize: 20
   }
 });
