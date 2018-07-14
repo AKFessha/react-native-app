@@ -1,5 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, Alert, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Alert,
+  Dimensions,
+  ScrollView
+} from "react-native";
 import { Button } from "react-native";
 import { blue } from "ansi-colors";
 import { Directions, TextInput } from "react-native-gesture-handler";
@@ -28,33 +36,41 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <View style={s.container}>
-        <View>
-          <Text>Get your GitHub repos </Text>
+      <ScrollView style={s.contentContainer}>
+        <View style={s.container}>
+          <View>
+            <Text style={s.title}>Get your GitHub repos </Text>
+          </View>
+          <View>
+            <TextInput
+              onChangeText={text =>
+                this.setState({
+                  searchValue: text
+                })
+              }
+              style={s.textBox}
+            />
+          </View>
+          <View>
+            <Button onPress={this.handleSearch} title="Search" />
+          </View>
+          <Text style={s.countText}>
+            {" "}
+            {this.state.repos.length + "  repos"}{" "}
+          </Text>
+          {this.state.repos.map(repo => {
+            return <Text>{repo.name} </Text>;
+          })}
         </View>
-        <View>
-          <TextInput
-            onChangeText={text =>
-              this.setState({
-                searchValue: text
-              })
-            }
-            style={s.textBox}
-          />
-        </View>
-        <View>
-          <Button onPress={this.handleSearch} title="Search" />
-        </View>
-        <Text style={s.countText}> {this.state.repos.length + "  repos"} </Text>
-        {this.state.repos.map(repo => {
-          return <Text>{repo.name} </Text>;
-        })}
-      </View>
+      </ScrollView>
     );
   }
 }
 
 const s = StyleSheet.create({
+  contentContainer: {
+    paddingVertical: 20
+  },
   container: {
     flex: 1,
     flexDirection: "column",
@@ -67,6 +83,11 @@ const s = StyleSheet.create({
     width: width - 20,
     borderColor: "gray",
     borderWidth: 1
+  },
+  title: {
+    paddingBottom: 20,
+    paddingTop: 20,
+    fontSize: 20
   },
   countText: {
     paddingBottom: 20,
