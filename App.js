@@ -55,12 +55,12 @@ export default class App extends React.Component {
             <Button onPress={this.handleSearch} title="Search" />
           </View>
           <Text style={s.countText}>
-            {" "}
             {this.state.repos.length + "  repos"}{" "}
           </Text>
           {this.state.repos.map(repo => {
             return <Text>{repo.name} </Text>;
           })}
+          <Text style={s.footer}> Awet Fessha @2018</Text>
         </View>
       </ScrollView>
     );
@@ -89,9 +89,16 @@ const s = StyleSheet.create({
     paddingTop: 20,
     fontSize: 20
   },
+
   countText: {
     paddingBottom: 20,
     paddingTop: 20,
     fontSize: 20
+  },
+  footer: {
+    paddingBottom: 20,
+    paddingTop: 20,
+    fontSize: 15,
+    fontStyle: "italic"
   }
 });
